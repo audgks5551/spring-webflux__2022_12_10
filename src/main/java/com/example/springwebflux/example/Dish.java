@@ -1,4 +1,4 @@
-package com.example.springwebflux;
+package com.example.springwebflux.example;
 
 public class Dish {
 

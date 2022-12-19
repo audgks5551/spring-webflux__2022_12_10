@@ -1,4 +1,4 @@
-package com.example.springwebflux;
+package com.example.springwebflux.example;
 
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
