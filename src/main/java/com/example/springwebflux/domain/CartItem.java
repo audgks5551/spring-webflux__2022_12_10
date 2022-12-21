@@ -8,7 +8,7 @@ public class CartItem {
 
     private CartItem() {}
 
-    CartItem(Item item) {
+    public CartItem(Item item) {
         this.item = item;
         this.quantity = 1;
     }
@@ -40,5 +40,9 @@ public class CartItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void increment() {
+        ++quantity;
     }
 }
