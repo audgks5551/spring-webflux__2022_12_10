@@ -29,6 +29,13 @@ public class Item {
         this.price = price;
     }
 
+    public Item(String id, String name, String description, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -104,5 +111,15 @@ public class Item {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

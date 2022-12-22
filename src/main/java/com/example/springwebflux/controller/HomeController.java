@@ -3,7 +3,6 @@ package com.example.springwebflux.controller;
 import com.example.springwebflux.domain.Cart;
 import com.example.springwebflux.repository.CartRepository;
 import com.example.springwebflux.repository.ItemRepository;
-import com.example.springwebflux.service.CartService;
 import com.example.springwebflux.service.InventoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +16,11 @@ import reactor.core.publisher.Mono;
 public class HomeController {
     private ItemRepository itemRepository;
     private CartRepository cartRepository;
-    private CartService cartService;
     private InventoryService inventoryService;
 
-    public HomeController(ItemRepository itemRepository, CartRepository cartRepository, CartService cartService, InventoryService inventoryService) {
+    public HomeController(ItemRepository itemRepository, CartRepository cartRepository, InventoryService inventoryService) {
         this.itemRepository = itemRepository;
         this.cartRepository = cartRepository;
-        this.cartService = cartService;
         this.inventoryService = inventoryService;
     }
 
@@ -39,7 +36,7 @@ public class HomeController {
 
     @PostMapping("/add/{id}")
     Mono<String> addToCart(@PathVariable String id) {
-        return this.cartService.addToCart("My Cart", id)
+        return this.inventoryService.addItemToCart("My Cart", id)
                 .thenReturn("redirect:/");
     }
 
