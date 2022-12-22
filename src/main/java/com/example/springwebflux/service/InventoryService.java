@@ -6,10 +6,12 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.mongodb.core.ReactiveFluentMongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 import static org.springframework.data.mongodb.core.query.Criteria.byExample;
 
+@Service
 public class InventoryService {
     private final ItemRepository itemRepository;
     private final ReactiveFluentMongoOperations fluentMongoOperations;

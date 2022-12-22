@@ -3,8 +3,12 @@ spring:
     hidden-method:
       filter:
         enabled: true
+
 de:
   flapdoodle:
     mongodb:
       embedded:
         version: 3.6.0
+logging:
+  level:
+    web: DEBUG
