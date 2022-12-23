@@ -1,8 +1,6 @@
 package com.example.springwebflux.controller;
 
 import com.example.springwebflux.domain.Cart;
-import com.example.springwebflux.repository.CartRepository;
-import com.example.springwebflux.repository.ItemRepository;
 import com.example.springwebflux.service.InventoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +12,9 @@ import reactor.core.publisher.Mono;
 
 @Controller
 public class HomeController {
-    private ItemRepository itemRepository;
-    private CartRepository cartRepository;
     private InventoryService inventoryService;
 
-    public HomeController(ItemRepository itemRepository, CartRepository cartRepository, InventoryService inventoryService) {
-        this.itemRepository = itemRepository;
-        this.cartRepository = cartRepository;
+    public HomeController(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
@@ -28,8 +22,8 @@ public class HomeController {
     Mono<Rendering> home() {
         return Mono.just(
                 Rendering.view("home.html")
-                        .modelAttribute("items", this.itemRepository.findAll())
-                        .modelAttribute("cart", this.cartRepository.findById("My Cart").defaultIfEmpty(new Cart("My Cart")))
+                        .modelAttribute("items", inventoryService.getInventory())
+                        .modelAttribute("cart", inventoryService.getCart("My Cart").defaultIfEmpty(new Cart("My Cart")))
                         .build()
         );
     }
@@ -47,7 +41,7 @@ public class HomeController {
             @RequestParam boolean useAnd) {
         return Mono.just(Rendering.view("home.html")
                 .modelAttribute("items", inventoryService.searchByExample(name, description, useAnd))
-                .modelAttribute("cart", this.cartRepository.findById("My Cart")
+                .modelAttribute("cart", inventoryService.getCart("My Cart")
                         .defaultIfEmpty(new Cart("My Cart")))
                 .build());
     }

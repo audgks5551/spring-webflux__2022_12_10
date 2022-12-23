@@ -56,4 +56,13 @@ public class InventoryService {
                         }))
                 .flatMap(this.cartRepository::save);
     }
+
+    public Flux<Item> getInventory() {
+        return itemRepository.findAll();
+    }
+
+
+    public Mono<Cart> getCart(String id) {
+        return cartRepository.findById(id);
+    }
 }
